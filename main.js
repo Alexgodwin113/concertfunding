@@ -1,5 +1,5 @@
-// ─────── CONFIG ───────
-// Replace these with your real values
+// ───── CONFIG ─────
+// Replace these with your real values:
 const AIRTABLE_BASE  = 'appXXXXXXXXXXXXXX';    // from https://airtable.com/api
 const AIRTABLE_TABLE = 'Donations';            // exact table name
 const AIRTABLE_PAT   = 'patYYYYYYYYYYYYYYYY';  // your Personal Access Token
@@ -11,18 +11,17 @@ const HEADERS = {
   'Content-Type':  'application/json'
 };
 
-// ─────── UI HOOKS ───────
+// ───── UI ELEMENTS ─────
 const progressInner = document.getElementById('progress-bar-inner');
 const raisedEl      = document.getElementById('raised');
 const donorTbody    = document.getElementById('donor-list');
 const errorEl       = document.getElementById('error');
 
-// ─────── FETCH & RENDER ───────
+// ───── FETCH & RENDER ─────
 async function loadDonations() {
   errorEl.textContent = '';
   try {
     const res = await fetch(`${API_URL}?pageSize=100`, { headers: HEADERS });
-
     if (!res.ok) {
       const text = await res.text();
       throw new Error(`Airtable error ${res.status}: ${text}`);
@@ -31,13 +30,18 @@ async function loadDonations() {
     const { records = [] } = await res.json();
     const data = records.map(r => r.fields || {});
 
-    // Totals & Progress
-    const total = data.reduce((sum, d) => sum + (d.Amount || 0), 0);
-    const pct   = Math.min(100, Math.round((total / GOAL) * 100));
+    console.log('Got records:', data);
 
-    progressInner.style.width       = pct + '%';
-    progressInner.textContent       = pct + '%';
-    raisedEl.textContent            = 'LKR ' + total.toLocaleString();
+    // Totals & Progress (show decimal or at least 1%)
+    const total  = data.reduce((sum, d) => sum + (d.Amount || 0), 0);
+    const rawPct = (total / GOAL) * 100;
+    const displayPct = (rawPct > 0 && rawPct < 1)
+      ? 1
+      : parseFloat(rawPct.toFixed(1));
+
+    progressInner.style.width     = rawPct + '%';
+    progressInner.textContent     = displayPct + '%';
+    raisedEl.textContent          = 'LKR ' + total.toLocaleString();
 
     // Table
     donorTbody.innerHTML = '';
@@ -65,7 +69,7 @@ async function loadDonations() {
   }
 }
 
-// ─────── ADD DONATION ───────
+// ───── ADD DONATION ─────
 document.getElementById('donation-form')
   .addEventListener('submit', async e => {
     e.preventDefault();
@@ -98,7 +102,7 @@ document.getElementById('donation-form')
     }
   });
 
-// ─────── CSV EXPORT ───────
+// ───── CSV EXPORT ─────
 document.getElementById('export-csv')
   .addEventListener('click', async () => {
     errorEl.textContent = '';
@@ -126,5 +130,5 @@ document.getElementById('export-csv')
     }
   });
 
-// ─────── INITIAL LOAD ───────
+// ───── INITIALIZE ─────
 loadDonations();
