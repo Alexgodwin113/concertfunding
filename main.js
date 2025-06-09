@@ -2,7 +2,7 @@
 // Replace these with your real values:
 const AIRTABLE_BASE  = 'appZkhdBlrRVmDHNN';    // from https://airtable.com/api
 const AIRTABLE_TABLE = 'Donations';            // exact table name
-const AIRTABLE_PAT   = 'patYYYYYYYYYYYYYYYYpatE59Kfz2EDRbuFr.b7872b56513d4222623a312ae8c66becf5583a3c97d49e3a72d77726df60af15';  // your Personal Access Token
+const AIRTABLE_PAT   = 'patE59Kfz2EDRbuFr.b7872b56513d4222623a312ae8c66becf5583a3c97d49e3a72d77726df60af15';  // your Personal Access Token
 
 const GOAL    = 28_500_000;
 const API_URL = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE}`;
