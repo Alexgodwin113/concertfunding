@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Concert Fundraiser</title>
+  <style>
+    #progress-bar { width: 100%; background: #eee; border-radius: 4px; overflow: hidden; }
+    #progress-bar-inner { height: 1.5em; width:0; background: #c33; color: #fff;
+                         text-align: center; line-height:1.5em; }
+    table { width: 100%; border-collapse: collapse; margin-top:1em; }
+    th, td { border: 1px solid #666; padding: 0.5em; text-align: left; }
+  </style>
+</head>
+<body>
+  <h1>🎵 Srinivas Concert Fundraising</h1>
+  <div id="progress-bar">
+    <div id="progress-bar-inner">0%</div>
+  </div>
+  <p>Raised: <span id="raised">LKR 0</span> / LKR 28,500,000</p>
+
+  <form id="donation-form">
+    <input type="text" name="Donor" placeholder="Donor Name" required>
+    <input type="number" name="Amount" placeholder="Amount (LKR)" required>
+    <input type="date"   name="Date" required>
+    <button type="submit">Add Donation</button>
+  </form>
+
+  <button id="export-csv">Download CSV</button>
+
+  <table>
+    <thead><tr><th>Date</th><th>Donor</th><th>Amount (LKR)</th></tr></thead>
+    <tbody id="donor-list"></tbody>
+  </table>
+
+  <script src="main.js"></script>
+</body>
+</html>
