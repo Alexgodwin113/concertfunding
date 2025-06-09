@@ -1,72 +1,130 @@
-// ←––– REPLACE THESE 3 VALUES
-const AIRTABLE_BASE  = 'appZkhdBlrRVmDHNN';
-const AIRTABLE_TABLE = 'Donations';
-const AIRTABLE_PAT   = 'patE59Kfz2EDRbuFr.b7872b56513d4222623a312ae8c66becf5583a3c97d49e3a72d77726df60af15';
+// ─────── CONFIG ───────
+// Replace these with your real values
+const AIRTABLE_BASE  = 'appXXXXXXXXXXXXXX';    // from https://airtable.com/api
+const AIRTABLE_TABLE = 'Donations';            // exact table name
+const AIRTABLE_PAT   = 'patYYYYYYYYYYYYYYYY';  // your Personal Access Token
 
-const GOAL = 28_500_000;
+const GOAL    = 28_500_000;
 const API_URL = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE}`;
 const HEADERS = {
   'Authorization': `Bearer ${AIRTABLE_PAT}`,
-  'Content-Type': 'application/json',
+  'Content-Type':  'application/json'
 };
 
-// 1) Fetch & render
+// ─────── UI HOOKS ───────
+const progressInner = document.getElementById('progress-bar-inner');
+const raisedEl      = document.getElementById('raised');
+const donorTbody    = document.getElementById('donor-list');
+const errorEl       = document.getElementById('error');
+
+// ─────── FETCH & RENDER ───────
 async function loadDonations() {
-  const res = await fetch(API_URL + '?pageSize=100', { headers: HEADERS });
-  const { records } = await res.json();
-  const data = records.map(r => r.fields || {});
+  errorEl.textContent = '';
+  try {
+    const res = await fetch(`${API_URL}?pageSize=100`, { headers: HEADERS });
 
-  // update totals
-  const total = data.reduce((sum, d) => sum + (d.Amount||0), 0);
-  const pct   = Math.min(100, Math.round(100 * total / GOAL));
-  document.getElementById('progress-bar-inner').style.width = pct + '%';
-  document.getElementById('progress-bar-inner').textContent = pct + '%';
-  document.getElementById('raised').textContent = 'LKR ' + total.toLocaleString();
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`Airtable error ${res.status}: ${text}`);
+    }
 
-  // update table
-  const tbody = document.getElementById('donor-list');
-  tbody.innerHTML = '';
-  data
-    .sort((a,b)=> new Date(b.Date) - new Date(a.Date))
-    .forEach(d => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${d.Date}</td><td>${d.Donor}</td><td>${d.Amount.toLocaleString()}</td>`;
-      tbody.appendChild(tr);
-    });
+    const { records = [] } = await res.json();
+    const data = records.map(r => r.fields || {});
+
+    // Totals & Progress
+    const total = data.reduce((sum, d) => sum + (d.Amount || 0), 0);
+    const pct   = Math.min(100, Math.round((total / GOAL) * 100));
+
+    progressInner.style.width       = pct + '%';
+    progressInner.textContent       = pct + '%';
+    raisedEl.textContent            = 'LKR ' + total.toLocaleString();
+
+    // Table
+    donorTbody.innerHTML = '';
+    data
+      .sort((a, b) => new Date(b.Date) - new Date(a.Date))
+      .forEach(d => {
+        const dateStr   = d.Date   || '—';
+        const donorStr  = d.Donor  || '—';
+        const amountStr = (d.Amount != null)
+          ? d.Amount.toLocaleString()
+          : '—';
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${dateStr}</td>
+          <td>${donorStr}</td>
+          <td>${amountStr}</td>
+        `;
+        donorTbody.appendChild(tr);
+      });
+
+  } catch (err) {
+    console.error(err);
+    errorEl.textContent = '⚠️ ' + err.message;
+  }
 }
 
-// 2) Handle “Add Donation”
-document.getElementById('donation-form').addEventListener('submit', async e => {
-  e.preventDefault();
-  const fields = {
-    Donor:  e.target.Donor.value,
-    Amount: parseFloat(e.target.Amount.value),
-    Date:   e.target.Date.value,
-  };
-  await fetch(API_URL, {
-    method: 'POST',
-    headers: HEADERS,
-    body: JSON.stringify({ fields }),
+// ─────── ADD DONATION ───────
+document.getElementById('donation-form')
+  .addEventListener('submit', async e => {
+    e.preventDefault();
+    errorEl.textContent = '';
+
+    const fields = {
+      Donor:  e.target.Donor.value,
+      Amount: parseFloat(e.target.Amount.value),
+      Date:   e.target.Date.value,
+    };
+
+    try {
+      const resp = await fetch(API_URL, {
+        method:  'POST',
+        headers: HEADERS,
+        body:    JSON.stringify({ fields })
+      });
+
+      if (!resp.ok) {
+        const text = await resp.text();
+        throw new Error(`Airtable POST failed ${resp.status}: ${text}`);
+      }
+
+      e.target.reset();
+      await loadDonations();
+    }
+    catch (err) {
+      console.error(err);
+      errorEl.textContent = '⚠️ ' + err.message;
+    }
   });
-  e.target.reset();
-  loadDonations();
-});
 
-// 3) Build & download CSV
-document.getElementById('export-csv').addEventListener('click', async () => {
-  const res = await fetch(API_URL + '?pageSize=100', { headers: HEADERS });
-  const { records } = await res.json();
-  const data = records.map(r => r.fields);
-  const rows = [
-    ['Date','Donor','Amount'],
-    ...data.map(d => [d.Date, d.Donor, d.Amount])
-  ];
-  const csv = rows.map(r => r.map(v => `"${v}"`).join(',')).join('\n');
-  const blob = new Blob([csv], { type:'text/csv' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'donations.csv';
-  a.click();
-});
+// ─────── CSV EXPORT ───────
+document.getElementById('export-csv')
+  .addEventListener('click', async () => {
+    errorEl.textContent = '';
+    try {
+      const res = await fetch(`${API_URL}?pageSize=100`, { headers: HEADERS });
+      if (!res.ok) throw new Error(`Export failed: ${res.statusText}`);
 
+      const { records = [] } = await res.json();
+      const data = records.map(r => r.fields || {});
+
+      const rows = [
+        ['Date','Donor','Amount'],
+        ...data.map(d => [d.Date || '', d.Donor || '', d.Amount || 0])
+      ];
+      const csv = rows.map(r => r.map(v => `"${v}"`).join(',')).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'donations.csv';
+      a.click();
+    }
+    catch (err) {
+      console.error(err);
+      errorEl.textContent = '⚠️ ' + err.message;
+    }
+  });
+
+// ─────── INITIAL LOAD ───────
 loadDonations();

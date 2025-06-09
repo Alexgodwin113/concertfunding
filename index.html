@@ -2,33 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Concert Fundraiser</title>
+  <title>🎵 Srinivas Concert Fundraising</title>
   <style>
+    body { font-family: sans-serif; max-width: 800px; margin: 2em auto; padding: 0 1em; }
+    h1 { display: flex; align-items: center; gap: 0.5em; }
     #progress-bar { width: 100%; background: #eee; border-radius: 4px; overflow: hidden; }
-    #progress-bar-inner { height: 1.5em; width:0; background: #c33; color: #fff;
-                         text-align: center; line-height:1.5em; }
-    table { width: 100%; border-collapse: collapse; margin-top:1em; }
+    #progress-bar-inner {
+      height: 1.5em;
+      width: 0;
+      background: #c33;
+      color: #fff;
+      text-align: center;
+      line-height: 1.5em;
+      transition: width 0.3s;
+    }
+    form, button { margin-top: 1em; }
+    input { margin-right: 0.5em; padding: 0.3em; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1em; }
     th, td { border: 1px solid #666; padding: 0.5em; text-align: left; }
+    #error { color: red; margin-top: 1em; }
   </style>
 </head>
 <body>
-  <h1>🎵 Srinivas Concert Fundraising</h1>
+
+  <h1>
+    <span style="font-size:1.5em;">🎵</span>
+    Srinivas Concert Fundraising
+  </h1>
+
   <div id="progress-bar">
     <div id="progress-bar-inner">0%</div>
   </div>
-  <p>Raised: <span id="raised">LKR 0</span> / LKR 28,500,000</p>
+  <p>
+    Raised: <strong id="raised">LKR 0</strong>
+    / LKR 28,500,000
+  </p>
 
   <form id="donation-form">
-    <input type="text" name="Donor" placeholder="Donor Name" required>
+    <input type="text"   name="Donor"  placeholder="Donor Name" required>
     <input type="number" name="Amount" placeholder="Amount (LKR)" required>
-    <input type="date"   name="Date" required>
+    <input type="date"   name="Date"   required>
     <button type="submit">Add Donation</button>
   </form>
 
   <button id="export-csv">Download CSV</button>
 
+  <div id="error"></div>
+
   <table>
-    <thead><tr><th>Date</th><th>Donor</th><th>Amount (LKR)</th></tr></thead>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Donor</th>
+        <th>Amount (LKR)</th>
+      </tr>
+    </thead>
     <tbody id="donor-list"></tbody>
   </table>
 
