@@ -1,4 +1,4 @@
-/* ─── Global ─────────────────────────────────────────────────────── */
+/* ─── Global layout ─────────────────────────────────────────────── */
 body {
   font-family: system-ui, sans-serif;
   margin: 2em auto;
@@ -8,18 +8,18 @@ body {
 h1 {
   display: flex;
   align-items: center;
-  gap: 0.4em;
+  gap: .4em;
   font-size: 1.8em;
   margin: 0;
 }
 
-/* ─── Images driven by CSS only ─────────────────────────────────── */
+/* ─── Banner & small logo (images only in CSS) ──────────────────── */
 .cover-img {
-  background: url("cover.jpg") center/contain no-repeat;
+  background: #fff url("cover.jpg") center/contain no-repeat;
   width: 100%;
-  height: 260px;          /* tweak if you want taller/shorter */
+  height: 260px;                 /* adjust for taller / shorter */
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
   margin-bottom: 1.8em;
 }
 
@@ -28,7 +28,7 @@ h1 {
   width: 80px;
   height: 80px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 6px rgba(0,0,0,.15);
 }
 
 .header-wrapper {
@@ -38,7 +38,7 @@ h1 {
   margin-bottom: 1em;
 }
 
-/* ─── Progress Bar ──────────────────────────────────────────────── */
+/* ─── Progress bar ──────────────────────────────────────────────── */
 #progress-bar {
   background: #eee;
   border-radius: 6px;
@@ -52,23 +52,24 @@ h1 {
   text-align: center;
   line-height: 1.7em;
   font-weight: 600;
-  transition: width 0.5s ease-out;
+  transition: width .5s ease-out;
   background-image:
     repeating-linear-gradient(
       45deg,
-      rgba(255, 255, 255, 0.2) 0,
-      rgba(255, 255, 255, 0.2) 10px,
-      rgba(255, 255, 255, 0.15) 10px,
-      rgba(255, 255, 255, 0.15) 20px
+      rgba(255,255,255,.2) 0,
+      rgba(255,255,255,.2) 10px,
+      rgba(255,255,255,.15) 10px,
+      rgba(255,255,255,.15) 20px
     ),
-    linear-gradient(90deg, #ff5f6d, #ffc371);
+    linear-gradient(90deg,#ff5f6d,#ffc371);
 }
 
-/* ─── Form & Table ──────────────────────────────────────────────── */
+/* ─── Form & table ──────────────────────────────────────────────── */
 form, button { margin-top: 1em; }
+
 input {
-  padding: 0.4em 0.5em;
-  margin-right: 0.4em;
+  padding: .4em .5em;
+  margin-right: .4em;
   border: 1px solid #aaa;
   border-radius: 4px;
 }
@@ -81,15 +82,15 @@ table {
 }
 th, td {
   border: 1px solid #666;
-  padding: 0.5em 0.6em;
+  padding: .5em .6em;
 }
 td:last-child { text-align: center; }
 
-/* ─── Auth Overlay ──────────────────────────────────────────────── */
+/* ─── Password overlay ──────────────────────────────────────────── */
 #auth-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0,0,0,.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,14 +100,14 @@ td:last-child { text-align: center; }
   background: #fff;
   padding: 2em 2.5em;
   border-radius: 8px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 6px 20px rgba(0,0,0,.25);
   text-align: center;
   max-width: 320px;
   width: 100%;
 }
 #pwd-error {
   color: crimson;
-  margin-top: 0.5em;
+  margin-top: .5em;
   height: 1em;
 }
 
