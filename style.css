@@ -1,95 +1,91 @@
-/* ─── Reset & base ───────────────────────────────────────────────── */
-html, body {
-  height: 100%;
-  margin: 0;
+/* ─── Global ─────────────────────────────────────────────────────── */
+body {
   font-family: system-ui, sans-serif;
-}
-
-/* ─── Full-screen background image ──────────────────────────────── */
-.cover-img {
-  position: fixed;
-  inset: 0;                      /* top:0; right:0; bottom:0; left:0 */
-  width: 100%;
-  height: 100%;
-  object-fit: cover;             /* always fill, crop if needed      */
-  z-index: -1;                   /* behind everything                */
-  filter: brightness(.6);        /* darken for text readability      */
-  pointer-events: none;          /* make it untouchable              */
-}
-
-/* ─── Content container (on top of bg) ──────────────────────────── */
-.content {
-  position: relative;
+  margin: 2em auto;
   max-width: 860px;
-  margin: 0 auto;
-  padding: 2rem 1rem 3rem;       /* bottom padding for mobile kb */
-  box-sizing: border-box;
+  padding: 0 1em;
 }
-
-/* ─── Heading ───────────────────────────────────────────────────── */
 h1 {
   display: flex;
   align-items: center;
   gap: 0.4em;
   font-size: 1.8em;
-  margin-top: 0;
-  color: #fff;
+  margin: 0;
 }
 
-/* ─── Progress bar ──────────────────────────────────────────────── */
+/* ─── Images driven by CSS only ─────────────────────────────────── */
+.cover-img {
+  background: url("cover.jpg") center/contain no-repeat;
+  width: 100%;
+  height: 260px;          /* tweak if you want taller/shorter */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1.8em;
+}
+
+.logo-img {
+  background: url("logo.jpg") center/contain no-repeat;
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin-bottom: 1em;
+}
+
+/* ─── Progress Bar ──────────────────────────────────────────────── */
 #progress-bar {
-  background: rgba(255,255,255,0.3);
+  background: #eee;
   border-radius: 6px;
   overflow: hidden;
   height: 1.7em;
-  margin-top: 1em;
 }
 #progress-bar-inner {
   height: 100%;
   width: 0;
-  color: #000;
+  color: #fff;
   text-align: center;
   line-height: 1.7em;
   font-weight: 600;
   transition: width 0.5s ease-out;
   background-image:
     repeating-linear-gradient(
-      45deg, rgba(255,255,255,0.4) 0, rgba(255,255,255,0.4) 10px,
-      rgba(255,255,255,0.3) 10px, rgba(255,255,255,0.3) 20px),
+      45deg,
+      rgba(255, 255, 255, 0.2) 0,
+      rgba(255, 255, 255, 0.2) 10px,
+      rgba(255, 255, 255, 0.15) 10px,
+      rgba(255, 255, 255, 0.15) 20px
+    ),
     linear-gradient(90deg, #ff5f6d, #ffc371);
 }
 
-/* ─── Form & table ──────────────────────────────────────────────── */
-form, button {
-  margin-top: 1em;
-}
+/* ─── Form & Table ──────────────────────────────────────────────── */
+form, button { margin-top: 1em; }
 input {
   padding: 0.4em 0.5em;
   margin-right: 0.4em;
-  border: 1px solid #888;
+  border: 1px solid #aaa;
   border-radius: 4px;
 }
-button {
-  cursor: pointer;
-}
+button { cursor: pointer; }
+
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 1em;
-  background: rgba(255,255,255,0.8);
-  border-radius: 6px;
-  overflow: hidden;
 }
 th, td {
   border: 1px solid #666;
   padding: 0.5em 0.6em;
-  text-align: left;
 }
-td:last-child {
-  text-align: center;
-}
+td:last-child { text-align: center; }
 
-/* ─── Auth overlay ──────────────────────────────────────────────── */
+/* ─── Auth Overlay ──────────────────────────────────────────────── */
 #auth-overlay {
   position: fixed;
   inset: 0;
@@ -97,7 +93,7 @@ td:last-child {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 9999;
 }
 .auth-card {
   background: #fff;
@@ -116,5 +112,6 @@ td:last-child {
 
 /* ─── Responsive tweak ──────────────────────────────────────────── */
 @media (max-width: 600px) {
-  .content { padding: 1.5rem 1rem 2.5rem; }
+  .cover-img { height: 180px; }
+  .logo-img  { width: 64px; height: 64px; }
 }

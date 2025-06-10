@@ -17,46 +17,47 @@
     </div>
   </div>
 
-  <!-- 🖼️ Full-screen background image (fixed) -->
-  <img src="cover.jpeg" alt="" class="cover-img" />
+  <!-- 🎤 Cover (background image set in CSS) -->
+  <div class="cover-img"></div>
 
-  <!-- ─── All page content sits on top of the image ─── -->
-  <main class="content">
+  <!-- 🖼️ Logo + Heading -->
+  <div class="header-wrapper">
+    <div class="logo-img"></div>
     <h1>🎵 Srinivas Concert Fundraising</h1>
+  </div>
 
-    <!-- 📊 Progress Bar -->
-    <div id="progress-bar">
-      <div id="progress-bar-inner">0.0%</div>
-    </div>
-    <p>
-      Raised:
-      <b>LKR <span id="raised-amount">0</span></b>
-      / LKR 28,500,000
-    </p>
+  <!-- 📊 Progress Bar -->
+  <div id="progress-bar">
+    <div id="progress-bar-inner">0.0%</div>
+  </div>
+  <p>
+    Raised:
+    <b>LKR <span id="raised-amount">0</span></b>
+    / LKR 28,500,000
+  </p>
 
-    <!-- 📝 Donation Form -->
-    <form id="donation-form">
-      <input type="text"   id="name"   placeholder="Donor Name"   required />
-      <input type="number" id="amount" placeholder="Amount (LKR)" required />
-      <input type="date"   id="date"   required />
-      <button type="submit">💾 Save</button>
-    </form>
+  <!-- 📝 Donation Form -->
+  <form id="donation-form">
+    <input type="text"   id="name"   placeholder="Donor Name"   required />
+    <input type="number" id="amount" placeholder="Amount (LKR)" required />
+    <input type="date"   id="date"   required />
+    <button type="submit">💾 Save</button>
+  </form>
 
-    <button type="button" onclick="downloadCSV()">⬇️ Download CSV</button>
+  <button type="button" onclick="downloadCSV()">⬇️ Download CSV</button>
 
-    <!-- 📅 Donations Table -->
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Donor</th>
-          <th>Amount (LKR)</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="donation-list"></tbody>
-    </table>
-  </main>
+  <!-- 📅 Donations Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Donor</th>
+        <th>Amount (LKR)</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="donation-list"></tbody>
+  </table>
 
   <script src="main.js"></script>
 </body>
