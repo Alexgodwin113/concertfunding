@@ -17,44 +17,35 @@
     </div>
   </div>
 
-  <!-- 🎤 Hero Image (full-width logo) -->
-  <img src="logo.jpeg" alt="Concert Logo" class="cover-img" />
+  <!-- 🎤 HERO (full-screen cover) -->
+  <section class="hero"></section>
 
-  <!-- 🏷️ Heading -->
-  <h1>🎵 Srinivas Concert Fundraising</h1>
+  <!-- 🏷️ Heading + content -->
+  <main class="content">
+    <h1>🎵 Srinivas Concert Fundraising</h1>
 
-  <!-- 📊 Progress Bar -->
-  <div id="progress-bar">
-    <div id="progress-bar-inner">0.0%</div>
-  </div>
-  <p>
-    Raised:
-    <b>LKR <span id="raised-amount">0</span></b>
-    / LKR 28,500,000
-  </p>
+    <!-- 📊 Progress Bar -->
+    <div id="progress-bar"><div id="progress-bar-inner">0.0%</div></div>
+    <p>Raised: <b>LKR <span id="raised-amount">0</span></b> / LKR 28,500,000</p>
 
-  <!-- 📝 Donation Form -->
-  <form id="donation-form">
-    <input type="text"   id="name"   placeholder="Donor Name"   required />
-    <input type="number" id="amount" placeholder="Amount (LKR)" required />
-    <input type="date"   id="date"   required />
-    <button type="submit">💾 Save</button>
-  </form>
+    <!-- 📝 Donation Form -->
+    <form id="donation-form">
+      <input type="text"   id="name"   placeholder="Donor Name"   required />
+      <input type="number" id="amount" placeholder="Amount (LKR)" required />
+      <input type="date"   id="date"   required />
+      <button type="submit">💾 Save</button>
+    </form>
 
-  <button type="button" onclick="downloadCSV()">⬇️ Download CSV</button>
+    <button type="button" onclick="downloadCSV()">⬇️ Download CSV</button>
 
-  <!-- 📅 Donations Table -->
-  <table>
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Donor</th>
-        <th>Amount (LKR)</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody id="donation-list"></tbody>
-  </table>
+    <!-- 📅 Donations Table -->
+    <table>
+      <thead>
+        <tr><th>Date</th><th>Donor</th><th>Amount (LKR)</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="donation-list"></tbody>
+    </table>
+  </main>
 
   <script src="main.js"></script>
 </body>
