@@ -17,16 +17,22 @@
     </div>
   </div>
 
-  <!-- 🎤 HERO (full-screen cover) -->
-  <section class="hero"></section>
+  <!-- 🖼️ Full-screen background image (fixed) -->
+  <img src="cover.jpeg" alt="" class="cover-img" />
 
-  <!-- 🏷️ Heading + content -->
+  <!-- ─── All page content sits on top of the image ─── -->
   <main class="content">
     <h1>🎵 Srinivas Concert Fundraising</h1>
 
     <!-- 📊 Progress Bar -->
-    <div id="progress-bar"><div id="progress-bar-inner">0.0%</div></div>
-    <p>Raised: <b>LKR <span id="raised-amount">0</span></b> / LKR 28,500,000</p>
+    <div id="progress-bar">
+      <div id="progress-bar-inner">0.0%</div>
+    </div>
+    <p>
+      Raised:
+      <b>LKR <span id="raised-amount">0</span></b>
+      / LKR 28,500,000
+    </p>
 
     <!-- 📝 Donation Form -->
     <form id="donation-form">
@@ -41,7 +47,12 @@
     <!-- 📅 Donations Table -->
     <table>
       <thead>
-        <tr><th>Date</th><th>Donor</th><th>Amount (LKR)</th><th>Actions</th></tr>
+        <tr>
+          <th>Date</th>
+          <th>Donor</th>
+          <th>Amount (LKR)</th>
+          <th>Actions</th>
+        </tr>
       </thead>
       <tbody id="donation-list"></tbody>
     </table>
