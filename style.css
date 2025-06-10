@@ -1,10 +1,21 @@
 /* ─── Global ──────────────────────────────────────────────────────── */
+
+/* ─── Full-page background using the logo ─────────────────────────── */
 body {
-  font-family: system-ui, sans-serif;
-  margin: 2em auto;
-  max-width: 860px;
-  padding: 0 1em;
+  position: relative;          /* establish a stacking context   */
 }
+
+body::before {
+  content: "";
+  position: fixed;             /* cover the whole viewport       */
+  inset: 0;
+  background: url("logo.jpg") center/cover no-repeat;
+  opacity: 0.07;               /* dial this up/down as you like  */
+  z-index: -1;                 /* sit *behind* real content      */
+  pointer-events: none;        /* keep it “untouchable”          */
+}
+
+
 h1 {
   display: flex;
   align-items: center;
