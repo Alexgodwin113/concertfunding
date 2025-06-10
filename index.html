@@ -1,51 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>🎵 Srinivas Concert Fundraising</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ▒▒▒  simple password overlay ▒▒▒ -->
+  <!-- 🔐 Password Lock -->
   <div id="auth-overlay">
     <div class="auth-card">
-      <h2>🔒 Enter password to continue</h2>
-      <input id="pwd-input" type="password" placeholder="Password" autofocus />
-      <button id="pwd-btn">Unlock</button>
-      <p id="pwd-error"></p>
+      <h2>Enter Password</h2>
+      <input type="password" id="pwd-input" placeholder="Enter password" />
+      <div id="pwd-error"></div>
     </div>
   </div>
 
-  <main id="app" hidden>
+  <!-- 🎤 Cover Image -->
+  <img src="cover.png" alt="Concert Cover" class="cover-img">
+
+  <!-- 🖼️ Logo & Heading -->
+  <div class="header-wrapper">
+    <img src="logo.png" alt="Concert Logo" class="logo-img">
     <h1>🎵 Srinivas Concert Fundraising</h1>
+  </div>
 
-    <div id="progress-bar"><div id="progress-bar-inner">0%</div></div>
-    <p>Raised: <strong id="raised">LKR 0</strong> / LKR 28,500,000</p>
+  <!-- 📊 Progress Bar -->
+  <div id="progress-bar">
+    <div id="progress-bar-inner">0.0%</div>
+  </div>
+  <p>Raised: <b>LKR <span id="raised-amount">0</span></b> / LKR 28,500,000</p>
 
-    <form id="donation-form">
-      <input type="text"   name="Donor"  placeholder="Donor Name"   required />
-      <input type="number" name="Amount" placeholder="Amount (LKR)" required />
-      <input type="date"   name="Date"   required />
-      <!-- hidden → set only while editing -->
-      <input type="hidden" name="RecordId" />
-      <button type="submit">💾 Save</button>
-      <button type="button" id="cancel-edit" hidden>✖️ Cancel</button>
-    </form>
+  <!-- 📝 Donation Form -->
+  <form id="donation-form">
+    <input type="text" id="name" placeholder="Donor Name" required>
+    <input type="number" id="amount" placeholder="Amount (LKR)" required>
+    <input type="date" id="date" required>
+    <button type="submit">💾 Save</button>
+  </form>
+  <button onclick="downloadCSV()">⬇️ Download CSV</button>
 
-    <button id="export-csv">⬇️ Download CSV</button>
-
-    <div id="error"></div>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th><th>Donor</th><th>Amount (LKR)</th><th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="donor-list"></tbody>
-    </table>
-  </main>
+  <!-- 📅 Donations Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Donor</th>
+        <th>Amount (LKR)</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="donation-list">
+      <!-- Entries injected here -->
+    </tbody>
+  </table>
 
   <script src="main.js"></script>
 </body>
