@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>🎵 Srinivas Concert Fundraising</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -17,11 +18,11 @@
   </div>
 
   <!-- 🎤 Cover Image -->
-  <div class="cover-img"></div>
+  <img src="cover.jpeg" alt="Concert Cover" class="cover-img" />
 
   <!-- 🖼️ Logo & Heading -->
   <div class="header-wrapper">
-    <div class="logo-img"></div>
+    <img src="logo.jpeg" alt="Concert Logo" class="logo-img" />
     <h1>🎵 Srinivas Concert Fundraising</h1>
   </div>
 
@@ -29,13 +30,17 @@
   <div id="progress-bar">
     <div id="progress-bar-inner">0.0%</div>
   </div>
-  <p>Raised: <b>LKR <span id="raised-amount">0</span></b> / LKR 28,500,000</p>
+  <p>
+    Raised:
+    <b>LKR <span id="raised-amount">0</span></b>
+    / LKR 28,500,000
+  </p>
 
   <!-- 📝 Donation Form -->
   <form id="donation-form">
-    <input type="text" id="name" placeholder="Donor Name" required>
-    <input type="number" id="amount" placeholder="Amount (LKR)" required>
-    <input type="date" id="date" required>
+    <input type="text" id="name" placeholder="Donor Name" required />
+    <input type="number" id="amount" placeholder="Amount (LKR)" required />
+    <input type="date" id="date" required />
     <button type="submit">💾 Save</button>
   </form>
   <button onclick="downloadCSV()">⬇️ Download CSV</button>
@@ -50,9 +55,7 @@
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody id="donation-list">
-      <!-- Entries injected here -->
-    </tbody>
+    <tbody id="donation-list"><!-- rows injected here --></tbody>
   </table>
 
   <script src="main.js"></script>
