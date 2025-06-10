@@ -1,4 +1,3 @@
-/* ─── Global ──────────────────────────────────────────────────────── */
 body {
   font-family: system-ui, sans-serif;
   margin: 2em auto;
@@ -12,21 +11,25 @@ h1 {
   font-size: 1.8em;
 }
 
-/* ─── Images (now <img> tags) ────────────────────────────────────── */
+/* ░░░ Images (Background-based) ░░░ */
 .cover-img {
-  display: block;
+  background-image: url('cover.jpeg');
+  background-size: cover;
+  background-position: center;
   width: 100%;
-  max-height: 240px;
-  object-fit: cover;
+  height: 240px;
   border-radius: 12px;
   margin-bottom: 1.5em;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .logo-img {
+  background-image: url('logo.jpeg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   width: 80px;
   height: 80px;
-  object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
@@ -38,7 +41,7 @@ h1 {
   margin-bottom: 1em;
 }
 
-/* ─── Progress Bar ───────────────────────────────────────────────── */
+/* ░░░ Progress Bar ░░░ */
 #progress-bar {
   background: #eee;
   border-radius: 6px;
@@ -56,12 +59,16 @@ h1 {
   transition: width 0.5s ease-out;
   background-image:
     repeating-linear-gradient(
-      45deg, rgba(255,255,255,0.2) 0, rgba(255,255,255,0.2) 10px,
-      rgba(255,255,255,0.15) 10px, rgba(255,255,255,0.15) 20px),
+      45deg,
+      rgba(255, 255, 255, 0.2) 0,
+      rgba(255, 255, 255, 0.2) 10px,
+      rgba(255, 255, 255, 0.15) 10px,
+      rgba(255, 255, 255, 0.15) 20px
+    ),
     linear-gradient(90deg, #ff5f6d, #ffc371);
 }
 
-/* ─── Table & Form ──────────────────────────────────────────────── */
+/* ░░░ Table & Form ░░░ */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -87,7 +94,7 @@ button {
   cursor: pointer;
 }
 
-/* ─── Auth Overlay ─────────────────────────────────────────────── */
+/* ░░░ Auth Overlay ░░░ */
 #auth-overlay {
   position: fixed;
   inset: 0;
@@ -110,10 +117,4 @@ button {
   color: crimson;
   margin-top: 0.5em;
   height: 1em;
-}
-
-/* ─── Responsive tweaks ─────────────────────────────────────────── */
-@media (max-width: 600px) {
-  .cover-img { max-height: 160px; }
-  .logo-img  { width: 64px; height: 64px; }
 }
