@@ -1,55 +1,32 @@
-/* ─── Global ──────────────────────────────────────────────────────── */
-
-/* ─── Full-page background using the logo ─────────────────────────── */
+/* ─── Global styles ──────────────────────────────────────────────── */
 body {
-  position: relative;          /* establish a stacking context   */
+  font-family: system-ui, sans-serif;
+  margin: 2em auto;
+  max-width: 860px;
+  padding: 0 1em;
 }
-
-body::before {
-  content: "";
-  position: fixed;             /* cover the whole viewport       */
-  inset: 0;
-  background: url("logo.jpg") center/cover no-repeat;
-  opacity: 0.07;               /* dial this up/down as you like  */
-  z-index: -1;                 /* sit *behind* real content      */
-  pointer-events: none;        /* keep it “untouchable”          */
-}
-
-
 h1 {
   display: flex;
   align-items: center;
   gap: 0.4em;
   font-size: 1.8em;
+  margin-top: 1.2em;
 }
 
-/* ─── Images (now <img> tags) ────────────────────────────────────── */
+/* ─── Hero / cover image (full-width logo) ──────────────────────── */
 .cover-img {
   display: block;
   width: 100%;
-  max-height: 240px;
-  object-fit: cover;
+  height: 260px;          /* adjust for a taller or shorter hero */
+  object-fit: contain;    /* show entire logo without cropping   */
+  object-position: center;
+  background: #fff;       /* keeps the white frame look          */
   border-radius: 12px;
-  margin-bottom: 1.5em;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1.8em;
 }
 
-.logo-img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-}
-
-.header-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 1em;
-  margin-bottom: 1em;
-}
-
-/* ─── Progress Bar ───────────────────────────────────────────────── */
+/* ─── Progress bar ──────────────────────────────────────────────── */
 #progress-bar {
   background: #eee;
   border-radius: 6px;
@@ -67,12 +44,16 @@ h1 {
   transition: width 0.5s ease-out;
   background-image:
     repeating-linear-gradient(
-      45deg, rgba(255,255,255,0.2) 0, rgba(255,255,255,0.2) 10px,
-      rgba(255,255,255,0.15) 10px, rgba(255,255,255,0.15) 20px),
+      45deg,
+      rgba(255, 255, 255, 0.2) 0,
+      rgba(255, 255, 255, 0.2) 10px,
+      rgba(255, 255, 255, 0.15) 10px,
+      rgba(255, 255, 255, 0.15) 20px
+    ),
     linear-gradient(90deg, #ff5f6d, #ffc371);
 }
 
-/* ─── Table & Form ──────────────────────────────────────────────── */
+/* ─── Table & form ──────────────────────────────────────────────── */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -98,7 +79,7 @@ button {
   cursor: pointer;
 }
 
-/* ─── Auth Overlay ─────────────────────────────────────────────── */
+/* ─── Auth overlay ──────────────────────────────────────────────── */
 #auth-overlay {
   position: fixed;
   inset: 0;
@@ -125,6 +106,5 @@ button {
 
 /* ─── Responsive tweaks ─────────────────────────────────────────── */
 @media (max-width: 600px) {
-  .cover-img { max-height: 160px; }
-  .logo-img  { width: 64px; height: 64px; }
+  .cover-img { height: 180px; }
 }

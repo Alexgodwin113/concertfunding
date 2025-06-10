@@ -17,14 +17,11 @@
     </div>
   </div>
 
-  <!-- 🎤 Cover Image -->
-  <img src="cover.jpeg" alt="Concert Cover" class="cover-img" />
+  <!-- 🎤 Hero Image (full-width logo) -->
+  <img src="logo.jpg" alt="Concert Logo" class="cover-img" />
 
-  <!-- 🖼️ Logo & Heading -->
-  <div class="header-wrapper">
-    <img src="logo.jpeg" alt="Concert Logo" class="logo-img" />
-    <h1>🎵 Srinivas Concert Fundraising</h1>
-  </div>
+  <!-- 🏷️ Heading -->
+  <h1>🎵 Srinivas Concert Fundraising</h1>
 
   <!-- 📊 Progress Bar -->
   <div id="progress-bar">
@@ -38,12 +35,13 @@
 
   <!-- 📝 Donation Form -->
   <form id="donation-form">
-    <input type="text" id="name" placeholder="Donor Name" required />
+    <input type="text"   id="name"   placeholder="Donor Name"   required />
     <input type="number" id="amount" placeholder="Amount (LKR)" required />
-    <input type="date" id="date" required />
+    <input type="date"   id="date"   required />
     <button type="submit">💾 Save</button>
   </form>
-  <button onclick="downloadCSV()">⬇️ Download CSV</button>
+
+  <button type="button" onclick="downloadCSV()">⬇️ Download CSV</button>
 
   <!-- 📅 Donations Table -->
   <table>
@@ -55,7 +53,7 @@
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody id="donation-list"><!-- rows injected here --></tbody>
+    <tbody id="donation-list"></tbody>
   </table>
 
   <script src="main.js"></script>
